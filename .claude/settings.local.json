@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(sp.specify)",
+      "Bash(git fetch:*)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/create-new-feature.ps1\" -Json -Number 1 -ShortName \"fullstack-web-todo\" -Description \"Phase II Full-Stack Web Todo Application\")",
+      "Skill(sp.plan)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/setup-plan.ps1\" -Json)",
+      "Skill(sp.tasks)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/check-prerequisites.ps1\" -Json)",
+      "Bash(python -m pytest:*)",
+      "Bash(dir:*)",
+      "Bash(pip install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run build:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}

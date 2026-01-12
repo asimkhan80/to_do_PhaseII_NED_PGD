@@ -1,55 +1,219 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+================================================================================
+SYNC IMPACT REPORT
+================================================================================
+Version change: 0.0.0 → 1.0.0 (MAJOR: Initial constitution ratification)
+
+Added Principles:
+  - I. Spec-Driven Development (Agent-First)
+  - II. Technology Stack Mandate
+  - III. Full-Stack Architecture
+  - IV. Data Persistence & Schema
+  - V. API Design Standards
+  - VI. Testing & Quality
+  - VII. Security & Configuration
+  - VIII. Phase Compliance
+
+Added Sections:
+  - Phase II Functional Requirements
+  - Technology Mandate
+  - Governance
+
+Templates requiring updates:
+  - ✅ plan-template.md (aligned with constitution check gates)
+  - ✅ spec-template.md (aligned with functional requirements)
+  - ✅ tasks-template.md (aligned with phase structure)
+
+Follow-up TODOs: None
+================================================================================
+-->
+
+# Hackathon II - Todo Evolution Constitution
+
+## Project Overview
+
+**Project Name**: Hackathon II - The Evolution of Todo
+**Current Phase**: Phase II - Full-Stack Web Todo App
+**Governance Scope**: Phase II through Phase V
+
+This Constitution extends Phase I principles while introducing organization, usability, intelligence, and cloud-native evolution across subsequent phases.
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Spec-Driven Development (Agent-First)
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+All production code MUST be generated via Claude Code / Agents following the Agentic Dev Stack workflow:
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+1. **Specification** (Spec-Kit Plus) - Requirements defined first
+2. **Architecture & Plan** - Technical design documented
+3. **Task Decomposition** - Work broken into testable units
+4. **Agent-based Implementation** - Code generated via agents
+5. **Review & Iteration** - Versioned specs maintained
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+Manual coding without agent mediation is PROHIBITED. All changes MUST flow through the spec-driven pipeline.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### II. Technology Stack Mandate (Phase II)
 
-### [PRINCIPLE_6_NAME]
+The following technology stack is NON-NEGOTIABLE for Phase II:
 
+| Layer | Technology | Rationale |
+|-------|------------|-----------|
+| Frontend | Next.js | React-based SSR/SSG framework |
+| Backend | FastAPI | Modern async Python API framework |
+| ORM | SQLModel | Type-safe SQL with Pydantic integration |
+| Database | Neon DB (PostgreSQL) | Serverless PostgreSQL |
+| API Style | REST | Standard HTTP methods, JSON payloads |
 
-[PRINCIPLE__DESCRIPTION]
+Deviations from this stack require explicit constitution amendment.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+### III. Full-Stack Architecture
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+The application MUST implement clear separation between frontend and backend:
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+- **Stateless APIs**: Backend endpoints MUST NOT maintain session state
+- **Environment-based Configuration**: All secrets and environment-specific values MUST use environment variables
+- **Clean REST Contracts**: API endpoints MUST follow RESTful conventions with documented request/response schemas
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### IV. Data Persistence & Schema
+
+Database schema MUST be:
+
+- Defined via specs before implementation
+- Version-controlled through migrations
+- Validated against SQLModel type definitions
+
+All entities MUST support:
+- Unique identifiers
+- Created/updated timestamps
+- Soft delete capability where appropriate
+
+### V. API Design Standards
+
+All REST endpoints MUST:
+
+- Use appropriate HTTP methods (GET, POST, PUT, PATCH, DELETE)
+- Return consistent JSON response structures
+- Include proper HTTP status codes
+- Provide meaningful error messages
+- Support pagination for list endpoints
+- Include request validation
+
+### VI. Testing & Quality
+
+While full TDD is encouraged, the following MUST be maintained:
+
+- Contract tests for all API endpoints
+- Integration tests for critical user journeys
+- Manual testing validation before phase completion
+
+Code quality standards:
+- Type hints required for Python code
+- TypeScript strict mode for frontend code
+- Linting and formatting enforced
+
+### VII. Security & Configuration
+
+Security requirements:
+
+- No hardcoded secrets or tokens
+- Environment variables via `.env` files
+- Input validation on all user-provided data
+- SQL injection prevention through ORM usage
+- XSS prevention in frontend
+
+### VIII. Phase Compliance
+
+Each phase is incremental, auditable, and spec-driven:
+
+- No phase may violate constraints of earlier phases
+- Phase features MUST NOT appear prematurely
+- Phase completion requires spec existence and implementation match
+
+## Phase II Functional Requirements
+
+### A. Task Organization (MANDATORY)
+
+- **Priorities**: High / Medium / Low
+- **Tags/Categories**: Work, Home, Personal (at minimum)
+
+### B. Search & Filtering (MANDATORY)
+
+- Search tasks by keyword
+- Filter by Status (Completed / Pending)
+- Filter by Priority
+- Filter by Category/Tag
+- Filter by Due date (if present)
+
+### C. Sorting (MANDATORY)
+
+- Alphabetical (A-Z)
+- Priority-based
+- Due-date-based
+
+### D. Advanced Features (Phase II+)
+
+**Recurring Tasks**:
+- Daily, Weekly, Monthly recurrence options
+- Auto-reschedule next occurrence
+- Recurrence rules stored and evaluated
+
+**Due Dates & Time Awareness**:
+- Due date support on all tasks
+- Optional time component
+- Backend enforcement of due-date validity
+- Frontend date/time selection UI
+
+## Phase Overview (Authoritative Reference)
+
+| Phase | Description | Tech Stack | Points | Status |
+|-------|-------------|------------|--------|--------|
+| I | In-Memory CLI Todo | Python, Claude Code | 100 | Complete |
+| II | Full-Stack Web Todo App | Next.js, FastAPI, SQLModel, Neon DB | 150 | **Active** |
+| III | AI-Powered Todo Chatbot | OpenAI ChatKit, Agents SDK, MCP SDK | 200 | Upcoming |
+| IV | Local Kubernetes Deployment | Docker, Minikube, Helm, kubectl-ai | 250 | Upcoming |
+| V | Advanced Cloud Deployment | Kafka, Dapr, DigitalOcean DOKS | 300 | Upcoming |
+
+**Total Core Points**: 1,000
+
+## Bonus Features (Optional)
+
+| Bonus Feature | Points |
+|---------------|--------|
+| Reusable Intelligence (Subagents, Agent Skills) | +200 |
+| Cloud-Native Blueprints via Agent Skills | +200 |
+| Urdu Language Support (Chatbot) | +100 |
+| Voice Commands | +200 |
+| **Total Bonus** | +600 |
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+### Amendment Procedure
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+1. Amendments MUST be documented with rationale
+2. Version number MUST be incremented per semantic versioning:
+   - MAJOR: Backward incompatible changes
+   - MINOR: New additions or expansions
+   - PATCH: Clarifications and fixes
+3. Migration plan required for breaking changes
+
+### Compliance Review
+
+- All PRs MUST verify constitution compliance
+- Phase boundaries MUST be respected
+- Complexity additions MUST be justified
+
+### Spec-Kit Plus Integration
+
+All specs MUST be organized under:
+
+```
+/specs
+├── phase_ii/
+├── phase_iii/
+├── phase_iv/
+└── phase_v/
+```
+
+Specs MUST be versioned and never overwritten.
+
+**Version**: 1.0.0 | **Ratified**: 2026-01-11 | **Last Amended**: 2026-01-11
