@@ -1,49 +1,36 @@
-# Multi-stage Dockerfile for Hugging Face Spaces
-# Runs Next.js frontend + FastAPI backend
+# Dockerfile for Hugging Face Spaces
+# Uses Node.js base with Python installed
 
-# Stage 1: Build Next.js frontend
-FROM node:20-alpine AS frontend-builder
-
-WORKDIR /app/frontend
-
-# Copy package files
-COPY frontend/package*.json ./
-
-# Install dependencies
-RUN npm ci
-
-# Copy source files
-COPY frontend/ ./
-
-# Set API URL to same origin (will be proxied)
-ENV NEXT_PUBLIC_API_URL=""
-
-# Build Next.js in standalone mode
-RUN npm run build
-
-# Stage 2: Final image
-FROM python:3.11-slim
+FROM node:20-slim
 
 WORKDIR /app
 
-# Install system dependencies including Node.js
+# Install Python, nginx and supervisor
 RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-venv \
     nginx \
     supervisor \
-    nodejs \
-    npm \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && ln -s /usr/bin/python3 /usr/bin/python
 
-# Copy and install Python backend
+# Copy and build frontend
+COPY frontend/package*.json ./frontend/
+WORKDIR /app/frontend
+RUN npm ci
+
+COPY frontend/ ./
+
+ENV NEXT_PUBLIC_API_URL=""
+RUN npm run build
+
+# Install Python backend dependencies
+WORKDIR /app
 COPY backend/requirements.txt ./backend/
-RUN pip install --no-cache-dir -r backend/requirements.txt pydantic-settings
+RUN pip3 install --no-cache-dir --break-system-packages -r backend/requirements.txt pydantic-settings
 
 COPY backend/ ./backend/
-
-# Copy built frontend from builder stage (standalone output)
-COPY --from=frontend-builder /app/frontend/.next/standalone ./frontend/
-COPY --from=frontend-builder /app/frontend/.next/static ./frontend/.next/static
-COPY --from=frontend-builder /app/frontend/public ./frontend/public
 
 # Copy config files
 COPY nginx.conf /etc/nginx/nginx.conf
@@ -67,5 +54,4 @@ EXPOSE 7860
 COPY start.sh /app/start.sh
 RUN chmod +x /app/start.sh
 
-# Run the startup script
 CMD ["/app/start.sh"]
