@@ -1,3 +1,13 @@
+---
+title: Todo App
+emoji: ✅
+colorFrom: blue
+colorTo: purple
+sdk: docker
+pinned: false
+license: mit
+---
+
 # Phase II Full-Stack Web Todo Application
 
 A production-grade full-stack web todo application with organization, filtering, and usability enhancements.
@@ -133,6 +143,26 @@ npm test
 - [Data Model](specs/001-fullstack-web-todo/data-model.md)
 - [Task List](specs/001-fullstack-web-todo/tasks.md)
 - [Quickstart Guide](specs/001-fullstack-web-todo/quickstart.md)
+
+## Hugging Face Spaces Deployment
+
+This app is configured for deployment on Hugging Face Spaces using Docker SDK.
+
+### Deploy to HF Spaces
+
+1. Create a new Space on [Hugging Face](https://huggingface.co/spaces)
+2. Select **Docker** as the SDK
+3. Clone this repository to your Space:
+   ```bash
+   git clone https://huggingface.co/spaces/YOUR_USERNAME/YOUR_SPACE_NAME
+   cd YOUR_SPACE_NAME
+   # Copy all files from this repo
+   git add .
+   git commit -m "Initial deployment"
+   git push
+   ```
+
+The app will automatically build and deploy. SQLite database is used for storage (note: data resets on Space restart).
 
 ## License
 

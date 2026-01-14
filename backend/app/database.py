@@ -4,14 +4,23 @@ from sqlmodel import Session, SQLModel, create_engine, select
 
 from app.config import settings
 
-# Create database engine with connection pooling
-engine = create_engine(
-    settings.database_url,
-    pool_pre_ping=True,
-    pool_size=5,
-    max_overflow=10,
-    echo=settings.debug,
-)
+# Create database engine with appropriate settings based on database type
+if settings.database_url.startswith("sqlite"):
+    # SQLite-specific configuration
+    engine = create_engine(
+        settings.database_url,
+        connect_args={"check_same_thread": False},
+        echo=settings.debug,
+    )
+else:
+    # PostgreSQL/other databases with connection pooling
+    engine = create_engine(
+        settings.database_url,
+        pool_pre_ping=True,
+        pool_size=5,
+        max_overflow=10,
+        echo=settings.debug,
+    )
 
 
 def create_db_and_tables():

@@ -4,7 +4,7 @@ from pydantic_settings import BaseSettings
 class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
 
-    database_url: str = "postgresql://localhost/todo"
+    database_url: str = "sqlite:///./todo.db"
     cors_origins: str = "http://localhost:3000"
     debug: bool = False
 
