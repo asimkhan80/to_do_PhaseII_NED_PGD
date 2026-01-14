@@ -25,6 +25,10 @@ else:
 
 def create_db_and_tables():
     """Create all database tables."""
+    # Import models so SQLModel registers them in metadata
+    from app.models.category import Category  # noqa: F401
+    from app.models.task import Task  # noqa: F401
+
     SQLModel.metadata.create_all(engine)
 
 
