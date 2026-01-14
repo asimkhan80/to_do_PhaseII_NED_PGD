@@ -1,5 +1,5 @@
 # Dockerfile for Hugging Face Spaces
-# Uses Node.js base with Python installed
+# Full-stack Todo App: Next.js + FastAPI
 
 FROM node:20-slim
 
