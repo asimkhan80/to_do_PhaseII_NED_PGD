@@ -25,6 +25,10 @@ COPY frontend/ ./
 ENV NEXT_PUBLIC_API_URL=""
 RUN npm run build
 
+# Copy static files for standalone mode
+RUN cp -r .next/static .next/standalone/.next/static
+RUN if [ -d "public" ]; then cp -r public .next/standalone/public; fi
+
 # Install Python backend dependencies
 WORKDIR /app
 COPY backend/requirements.txt ./backend/
